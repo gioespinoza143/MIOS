@@ -23,4 +23,29 @@ Whether the source is:
 
 MIOS is not intended to be another guitar processor.
 
-It is an operating system for musical performance.
+It is a modular operating environment for musical performance and arrangement.
+
+## Design Philosophy
+
+MIOS is built on six core principles.
+
+- Signal Flow First
+- One Responsibility Per Layer
+- Audio and MIDI are Equal Citizens
+- The Musician Thinks Musically
+- Modularity is Integrated, Not a Feature
+- The Instrument Boots Into Music
+
+- ## Technology
+
+Current Prototype Platform
+
+- Raspberry Pi
+- Pisound
+- Pure Data
+- Python
+- JACK
+- FluidSynth
+- Carla
+
+- MIOS began as G!O's search for an efficient way to unite Audio, MIDI, and modular performance into a single instrument. Every architectural decision in this project is measured against one question: Does this help the musician create?
