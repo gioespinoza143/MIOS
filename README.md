@@ -36,7 +36,7 @@ MIOS is built on six core principles.
 - Modularity is Integrated, Not a Feature
 - The Instrument Boots Into Music
 
-- ## Technology
+## Technology
 
 Current Prototype Platform (These technologies are implementation choices, not design requirements.
 MIOS is designed around its architecture first, allowing the underlying technology to evolve.)
@@ -49,7 +49,7 @@ MIOS is designed around its architecture first, allowing the underlying technolo
 - FluidSynth
 - Carla
 
-- ## Current Status
+## Current Status
 
 MIOS is currently in the architecture and design phase.
 
@@ -58,5 +58,5 @@ The primary goal is to establish a strong and extensible system architecture bef
 The philosophy, layer structure, and routing concepts documented here will guide future software and hardware development.
 
 
-MIOS began as G!O's search for a better workflow.
+MIOS began as a multiinstrumentalist's search for a better workflow.
 It is evolving into an instrument platform designed around the belief that technology should disappear, leaving only the musician and the music.
