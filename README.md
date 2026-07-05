@@ -58,5 +58,5 @@ The primary goal is to establish a strong and extensible system architecture bef
 The philosophy, layer structure, and routing concepts documented here will guide future software and hardware development.
 
 
-MIOS began as a multiinstrumentalist's search for a better workflow.
+MIOS began as a multi-instrumentalist's search for a better workflow.
 It is evolving into an instrument platform designed around the belief that technology should disappear, leaving only the musician and the music.
