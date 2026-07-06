@@ -27,14 +27,15 @@ It is a modular operating environment for musical performance, live arrangement,
 
 ## Design Philosophy
 
-MIOS is built on six core principles.
+MIOS is built on seven core principles.
 
-- Signal Flow First
-- One Responsibility Per Layer
-- Audio and MIDI are Equal Citizens
 - The Musician Thinks Musically
-- Modularity is Integrated, Not a Feature
-- The Instrument Boots Into Music
+- Technology Is An Implementation
+- One Responsibility Per Layer
+- Every Signal Is Musical
+- Relationships Over Assignments
+- Complexity Should Grow With The Musician
+- The Instrument Adapts To The Musician
 
 ## Technology
 
