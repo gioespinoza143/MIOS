@@ -81,4 +81,4 @@ Depth should be available, never mandatory.
 
 # Principle VII
 ## The Instrument Adapts To The Musician
-Once the User has created their intended presets, they should feel like the instrument is actively participating in the perfomance jusrt as much as the musician is. It might feel like the instrument is almost reading your thoughts or meeting you in the middle before you get there.
+Once the User has created their intended presets, they should feel like the instrument is actively participating in the perfomance just as much as the musician is. It might feel like the instrument is almost reading your thoughts or meeting you in the middle before you get there.
