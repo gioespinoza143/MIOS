@@ -1,6 +1,7 @@
 # Book III — Architecture
 
 > The systems, responsibilities, and relationships that allow MIOS to behave as a unified instrument.
+> Architectural dependencies should emerge naturally from the responsibilities of existing architectural objects rather than being introduced prematurely. When experimentation reveals that one concept depends on another, the architecture should evolve to reflect that dependency.
 
 ## The Architectural Question
 
@@ -45,6 +46,8 @@ The modules/systems in place communicate with the hardware, the user should not 
 The Unit is constantly reacting and adapting to what the musican is inputting both musically, as well as technically.
 
 ## Fundamental Architectural Objects
+_Architectural objects are introduced only when they represent a unique responsibility that cannot be expressed by existing objects.
+If a concept can be described by the responsibilities of existing architectural objects, it does not become a new object._ 
 
 ### Connection
 
@@ -123,3 +126,55 @@ Systems manage responsibilities that support the operation of the instrument, in
 Multiple Systems may communicate with the MIOS Core, Engines, and other Systems while remaining responsible for their own defined area of operation.
 
 **Modules perform. Engines execute. Systems manage. The Core governs.**
+
+## Architectural Validation
+
+The following scenarios test the fundamental architectural objects of MIOS against real musical behavior.
+
+Each scenario examines the responsibilities of Signals, Modules, Connections, the Graph, the MIOS Core, Engines, and Systems.
+
+The purpose of these tests is not to demonstrate implementation, but to determine whether the architecture can describe the behavior of the instrument clearly, consistently, and without unnecessary overlap.
+
+### Scenario I — Basic Audio Processing
+Guitar Input → Amp → Delay → Looper → Audio Output
+
+### Signal
+The guitar produces an Audio Signal that enters the instrument.
+This Signal carries musical information through the Graph and becomes the primary object acted upon by each Module.
+
+### Module
+Each Module performs one independent musical responsibility.
+The Amp colors the Signal.
+The Delay repeats the Signal.
+The Looper records and reproduces the Signal.
+Although each Module performs its own work independently, together they create the musical behavior of the instrument.
+
+### Connection
+Connections define the valid relationships between each Output and Input.
+They allow the Guitar Signal to travel from the Guitar Input to the Amp Module, then through the Delay Module, into the Looper Module, and finally to the Audio Output.
+
+### Graph
+The Graph represents the complete arrangement of Modules and Connections that define the instrument at this moment.
+Changing the Graph changes the structure of the instrument.
+
+### Engine
+The Audio Engine continuously executes the Amp, Delay, and Looper Modules in real time.
+Although each Module performs a different musical responsibility, they rely on the same execution environment to process Audio with minimal latency.
+
+### System
+The Hardware System manages communication with the physical audio input and output.
+The UI System allows the musician to observe and modify the instrument.
+The Session System preserves this Graph and its Module states for future recall.
+
+### MIOS Core
+The MIOS Core validates the Graph, confirms that every Connection is compatible, and coordinates the Systems and Engines responsible for executing the instrument.
+Once the instrument is valid, the Core allows the architecture to operate without needing to directly perform the work of each Module.
+
+## Next Session
+
+- Validate Scenario II
+- Define Camino's architectural role
+- Determine whether Junta belongs to Architecture or Interaction
+- Begin Roadmap Phase I
+
+### Question: Should Outputs and Inputs be considered Modules, or are they architectural endpoints?

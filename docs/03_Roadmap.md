@@ -1,4 +1,14 @@
-Roadmap
+# Book IV — Roadmap
+
+> The Roadmap defines the order in which MIOS is developed.
+
+Architecture defines what must exist.
+
+The Roadmap defines when those things should be built.
+
+The purpose of the Roadmap is to organize development into practical milestones while remaining faithful to the Vision, Philosophy, and Architecture of MIOS.
+
+Features earn their place through architectural necessity and musical value rather than technical novelty.
 
 Phase I
 --------
