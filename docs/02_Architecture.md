@@ -51,7 +51,7 @@ If a concept can be described by the responsibilities of existing architectural 
 
 ### Connection
 
-A Connection defines the relationship between the Output of one Module and the Input of another.
+A Connection declares a relationship between a Module’s Output endpoint and another Module’s Input endpoint.
 
 Modules declare the types of Signals they are capable of receiving and producing. The MIOS Core understands these declarations and uses them to determine whether a requested Connection is valid.
 
@@ -91,6 +91,8 @@ The Core understands the fundamental architectural objects within MIOS and the r
 
 It validates Modules and Connections, maintains the coherence of the Graph, and coordinates the systems responsible for executing its structure.
 
+**The MIOS Core validates compatibility.**
+
 The MIOS Core does not perform the specialized musical work of individual Modules or directly process every Signal traveling through the instrument. Instead, it ensures that the systems performing this work remain organized within a valid and coherent structure.
 
 **The Core governs the instrument. The systems within it perform the work.**
@@ -100,6 +102,7 @@ The MIOS Core does not perform the specialized musical work of individual Module
 A Module is an independent functional unit within MIOS that performs one defined musical responsibility and declares the signals it is capable of receiving and producing.
 
 Modules remain responsible for their own internal behavior while the MIOS Core remains responsible for validating how Modules may connect.
+**Modules declare compatibility.**
 
 **A Module understands the work it performs. The MIOS core understands how that Module may participate in the instrument.**
 
@@ -107,7 +110,7 @@ Modules remain responsible for their own internal behavior while the MIOS Core r
 
 Before there is MIOS, there is Signal.
 
-A Signal is a representation of musical information that can be received, produced, transformed, and transmitted throughout the instrument.
+A Signal is the architectural representation of musical information exchanged between Modules.
 
 Signals allow Modules to communicate while remaining independent of one another. A Module does not need to understand the internal behavior of another Module. It only needs to understand the types of Signals it can receive and produce.
 
@@ -178,3 +181,8 @@ Once the instrument is valid, the Core allows the architecture to operate withou
 - Begin Roadmap Phase I
 
 ### Question: Should Outputs and Inputs be considered Modules, or are they architectural endpoints?
+
+## Architectural Languages
+Architectural objects communicate through shared languages rather than shared implementations.
+
+SignalType is the first architectural language of MIOS. It provides a common vocabulary through which Modules, Connections, the Graph, the Core, and Systems can cooperate without becoming dependent upon one another.
