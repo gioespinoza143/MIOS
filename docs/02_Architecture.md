@@ -59,6 +59,9 @@ A Connection does not determine the behavior of the Modules it joins. It only de
 
 **Modules declare their capabilities. Connections define their relationships. The MIOS Core enforces the rules between them.**
 
+### Endpoint 
+An Endpoint identifies a specific place where a Module receives or produces a specific SignalType.
+
 ### Engine
 
 An Engine is a specialized execution system responsible for performing work that requires continuous, coordinated, or time-sensitive processing.
@@ -186,3 +189,38 @@ Once the instrument is valid, the Core allows the architecture to operate withou
 Architectural objects communicate through shared languages rather than shared implementations.
 
 SignalType is the first architectural language of MIOS. It provides a common vocabulary through which Modules, Connections, the Graph, the Core, and Systems can cooperate without becoming dependent upon one another.
+
+# ARCHITECTURAL TRUTH
+
+"Can this system exist?"
+
+        ↓
+
+MIOSCore
+
+
+EXECUTION TRUTH
+
+"Can work be ordered?"
+
+        ↓
+
+Engine
+
+
+IMPLEMENTATION TRUTH
+
+"What implementations are available?"
+
+        ↓
+
+RuntimeRegistry
+
+
+REALIZATION TRUTH
+
+"Can this complete Graph become alive here and now?"
+
+        ↓
+
+???

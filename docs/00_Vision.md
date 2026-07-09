@@ -1,6 +1,4 @@
-# Book I
-
-# Vision
+# Book I - Vision
 
 ---
 

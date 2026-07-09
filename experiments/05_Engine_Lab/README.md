@@ -1,0 +1,1 @@
+Engine interprets a truthful Graph, derives a valid Module execution order from dependency relationships independently of Connection insertion order, and explicitly fails when no execution order can be derived.

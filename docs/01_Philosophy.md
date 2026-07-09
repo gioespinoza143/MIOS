@@ -1,3 +1,4 @@
+# Book II - Philosophy
 # Principle I
 ## The Musician Thinks Musically
 Technology has become an essential part of modern musical performance.
@@ -82,3 +83,33 @@ Depth should be available, never mandatory.
 # Principle VII
 ## The Instrument Adapts To The Musician
 Once the User has created their intended presets, they should feel like the instrument is actively participating in the perfomance just as much as the musician is. It might feel like the instrument is almost reading your thoughts or meeting you in the middle before you get there.
+
+# Principle VIII
+## The Polis
+MIOS is not built from features, but from responsibilities.
+Like the Polis, the strength of the instrument emerges not from any single component, but from specialized parts working together toward a common purpose.
+Every architectural object exists to fulfill one responsibility. It should neither assume the duties of another nor depend upon another to define its own.
+> The instrument succeeds when every responsibility has a natural home.
+### The Polis becomes:
+Module
+→ WHAT exists
+
+Connection
+→ WHAT relates
+
+Core
+→ WHAT is lawful
+
+Graph
+→ WHAT belongs to this instrument
+
+Engine
+→ WHAT order work occurs in
+
+ModuleRuntime
+→ HOW one Module is implemented
+
+RuntimeRegistry
+→ WHERE the Engine can find that implementation
+
+**Law I — Truthfulness: Every architectural object must be capable of truthfully describing its own responsibilities without requiring knowledge of any other architectural object.**
