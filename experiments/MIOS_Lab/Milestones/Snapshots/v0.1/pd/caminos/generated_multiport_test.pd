@@ -1,0 +1,4 @@
+#N canvas 100 100 800 600 10;
+#X obj 100 100 source;
+#X obj 100 200 destination;
+#X connect 0 1 1 2;

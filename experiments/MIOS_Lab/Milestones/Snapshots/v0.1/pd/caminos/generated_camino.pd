@@ -1,0 +1,11 @@
+#N canvas 412 217 800 607 10;
+#X obj 500 100 loadbang;
+#X msg 500 150 \; pd dsp 1;
+#X obj 100 100 /home/patch/MIOS/pd/modules/audio_input;
+#X obj 100 200 /home/patch/MIOS/pd/modules/gain;
+#X obj 100 400 /home/patch/MIOS/pd/modules/audio_output;
+#X obj 100 299 /home/patch/MIOS/pd/modules/delay;
+#X connect 0 0 1 0;
+#X connect 2 0 3 0;
+#X connect 3 0 5 0;
+#X connect 5 0 4 0;

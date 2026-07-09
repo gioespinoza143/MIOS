@@ -1,0 +1,151 @@
+import subprocess
+from module import Module
+from module_runtime import ModuleRuntime
+from signal_type import SignalType
+from mios_signal import Signal
+from endpoint import Endpoint
+from connection import Connection
+from mios_core import MIOSCore
+from graph import Graph
+from engine import Engine
+from runtime_registry import RuntimeRegistry
+
+amp_audio_in = Endpoint(
+    "Audio In",
+    SignalType.AUDIO
+)
+
+amp_audio_out = Endpoint(
+    "Audio Out",
+    SignalType.AUDIO
+)
+
+delay_audio_in = Endpoint(
+    "Audio In",
+    SignalType.AUDIO
+)
+
+delay_audio_out = Endpoint(
+    "Audio Out",
+    SignalType.AUDIO
+)
+
+delay_time = Endpoint(
+    "Delay Time",
+    SignalType.CONTROL
+)
+
+amp = Module(
+    "Amp",
+    inputs=[amp_audio_in],
+    outputs=[amp_audio_out]
+)
+
+delay = Module(
+    "Delay",
+    inputs=[delay_audio_in, delay_time],
+    outputs=[delay_audio_out]
+)
+
+looper_audio_in = Endpoint(
+	"Audio In",
+	SignalType.AUDIO
+)
+
+looper_audio_out = Endpoint(
+	"Audio Out",
+	SignalType.AUDIO
+)
+
+looper = Module(
+	"Looper",
+	inputs=[looper_audio_in],
+	outputs=[looper_audio_out]
+)
+
+
+good_connection = Connection(
+    source_module=amp,
+    source_output=amp_audio_out,
+    destination_module=delay,
+    destination_input=delay_audio_in
+)
+
+amp_to_looper = Connection(
+	source_module=amp,
+	source_output=amp_audio_out,
+	destination_module=looper,
+	destination_input=looper_audio_in
+)
+
+
+core = MIOSCore()
+graph = Graph(core)
+
+graph.add_module(amp)
+graph.add_module(looper)
+graph.add_module(delay)
+
+graph.add_connection(amp_to_looper)
+graph.add_connection(good_connection)
+
+
+engine = Engine(graph)
+
+amp_runtime = ModuleRuntime(
+    module=amp,
+    implementation="amp.pd"
+)
+
+delay_runtime = ModuleRuntime(
+    module=delay,
+    implementation="delay.pd"
+)
+
+looper_runtime = ModuleRuntime(
+    module = looper,
+    implementation="looper.pd"
+)
+
+registry = RuntimeRegistry()
+registry.register(amp_runtime)
+registry.register(delay_runtime)
+registry.register(looper_runtime)
+
+execution_order = engine.get_execution_order()
+
+for module in execution_order:
+    runtime = registry.resolve(module)
+
+    print(
+        module.name,
+        "→",
+        runtime.implementation
+    )
+
+test_tone = Module(
+    "TEST Tone",
+    inputs=[],
+    outputs=[]
+)
+
+test_tone_runtime = ModuleRuntime(
+    module=test_tone,
+    implementation="/home/patch/MIOS/pd/test_tone.pd"
+)
+
+print(
+    test_tone_runtime.module.name,
+    "→",
+    test_tone_runtime.implementation
+)
+
+print(
+    "Implementation exists:",
+    test_tone_runtime.implementation_exists()
+)
+
+subprocess.run([
+    "pd",
+    test_tone_runtime.implementation
+])
