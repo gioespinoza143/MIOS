@@ -1,2 +1,17 @@
+
+# Python
+venv/
+__pycache__/
+
+# macOS
 .DS_Store
-*.sf2
+
+# SoundFonts
+soundfonts/*.sf2
+soundfonts/*.sf3
+
+# Samples
+samples/
+
+# Cache
+*.pyc

@@ -20,6 +20,8 @@ from pd_runtime_registry import PDRuntimeRegistry
 from pd_realizer import PDRealizer
 
 from camino_runtime import CaminoRuntime
+
+from pd_launcher import PDLauncher
 from process_manager import ProcessManager
 
 
@@ -181,7 +183,7 @@ gain_runtime = ModuleRuntime(
 
 delay_runtime = ModuleRuntime(
     module=delay,
-    implementation="/home/patch/MIOS/pd/modules/delay.pd"
+    implementation="/home/patch/MIOS/pd/modules/mios_delay.pd"
 )
 
 audio_output_runtime = ModuleRuntime(
@@ -211,14 +213,32 @@ runtime_registry.register(audio_output_runtime)
 # CREATE RUNTIME RESOLVER
 # ============================================================
 
-resolver = RuntimeResolver(runtime_registry)
+resolver = RuntimeResolver(
+    runtime_registry
+)
 
 
 # ============================================================
 # RESOLVE EXECUTION ORDER
 # ============================================================
 
-resolved_runtimes = resolver.resolve(execution_order)
+resolved_runtimes = resolver.resolve(
+    execution_order
+)
+
+
+# ============================================================
+# DISPLAY RESOLVED RUNTIMES
+# ============================================================
+
+print("\nRESOLVED RUNTIMES:")
+
+for runtime in resolved_runtimes:
+    print(
+        runtime.module.name,
+        "->",
+        runtime.implementation
+    )
 
 
 # ============================================================
@@ -249,7 +269,9 @@ comandante = Comandante()
 # ISSUE MIOS COMMANDS
 # ============================================================
 
-commands = comandante.issue_commands(plan)
+commands = comandante.issue_commands(
+    plan
+)
 
 
 # ============================================================
@@ -261,6 +283,7 @@ print("\nMIOS COMMANDS:")
 for command in commands:
 
     if command["command"] == "create":
+
         print(
             "CREATE",
             command["module"].name,
@@ -269,6 +292,7 @@ for command in commands:
         )
 
     elif command["command"] == "connect":
+
         print(
             "CONNECT",
             command["source_module"].name,
@@ -333,10 +357,21 @@ pd_runtime_registry = PDRuntimeRegistry()
 # REGISTER PD RUNTIME MAPPINGS
 # ============================================================
 
-pd_runtime_registry.register(audio_input_mapping)
-pd_runtime_registry.register(gain_mapping)
-pd_runtime_registry.register(delay_mapping)
-pd_runtime_registry.register(audio_output_mapping)
+pd_runtime_registry.register(
+    audio_input_mapping
+)
+
+pd_runtime_registry.register(
+    gain_mapping
+)
+
+pd_runtime_registry.register(
+    delay_mapping
+)
+
+pd_runtime_registry.register(
+    audio_output_mapping
+)
 
 
 # ============================================================
@@ -432,9 +467,16 @@ print(
     generated_patch
 )
 
+
+# ============================================================
+# DISPLAY GENERATED PD PATCH
+# ============================================================
+
 print("\nGENERATED PD PATCH:")
 
-print(generated_patch.read_text())
+print(
+    generated_patch.read_text()
+)
 
 
 # ============================================================
@@ -456,13 +498,52 @@ print("\nGENERATED CAMINO RUNTIME:")
 
 print(
     "Camino implementation exists:",
-    Path(camino_runtime.implementation).exists()
+    Path(
+        camino_runtime.implementation
+    ).exists()
 )
 
 print(
     "Camino implementation:",
     camino_runtime.implementation
 )
+
+
+# ============================================================
+# DEFINE PD MODULES PATH
+# ============================================================
+
+modules_path = Path(
+    "/home/patch/MIOS/pd/modules"
+)
+
+
+# ============================================================
+# CREATE PD LAUNCHER
+# ============================================================
+
+pd_launcher = PDLauncher(
+    modules_path=modules_path
+)
+
+
+# ============================================================
+# CREATE LAUNCH COMMAND
+# ============================================================
+
+launch_command = pd_launcher.create_launch_command(
+    camino_runtime
+)
+
+
+# ============================================================
+# DISPLAY LAUNCH COMMAND
+# ============================================================
+
+print("\nPD LAUNCH COMMAND:")
+
+for item in launch_command.command:
+    print(item)
 
 
 # ============================================================
@@ -477,18 +558,25 @@ process_manager = ProcessManager()
 # ============================================================
 
 print(
-    "Initial running state:",
-    process_manager.is_running(camino_runtime)
+    "\nInitial running state:",
+    process_manager.is_running(
+        camino_runtime
+    )
 )
 
 
 # ============================================================
-# START GENERATED CAMINO
+# START MIOS-GENERATED CAMINO
 # ============================================================
 
-print("\nSTARTING MIOS-GENERATED CAMINO...")
+print(
+    "\nSTARTING MIOS-GENERATED CAMINO..."
+)
 
-process_manager.start(camino_runtime)
+process_manager.start(
+    camino_runtime,
+    launch_command
+)
 
 
 # ============================================================
@@ -497,7 +585,9 @@ process_manager.start(camino_runtime)
 
 print(
     "Camino running after start:",
-    process_manager.is_running(camino_runtime)
+    process_manager.is_running(
+        camino_runtime
+    )
 )
 
 
@@ -512,12 +602,16 @@ input(
 
 
 # ============================================================
-# STOP GENERATED CAMINO
+# STOP MIOS-GENERATED CAMINO
 # ============================================================
 
-print("\nSTOPPING MIOS-GENERATED CAMINO...")
+print(
+    "\nSTOPPING MIOS-GENERATED CAMINO..."
+)
 
-process_manager.stop(camino_runtime)
+process_manager.stop(
+    camino_runtime
+)
 
 
 # ============================================================
@@ -526,5 +620,7 @@ process_manager.stop(camino_runtime)
 
 print(
     "Camino running after stop:",
-    process_manager.is_running(camino_runtime)
+    process_manager.is_running(
+        camino_runtime
+    )
 )
